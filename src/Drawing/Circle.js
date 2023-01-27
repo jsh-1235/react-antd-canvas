@@ -228,7 +228,9 @@ export default function Circle({ url }) {
   };
 
   const handleMenuClick = (e) => {
-    message.info(`${typeof e.key} ${e.key}`);
+    const key = Number(e.key);
+
+    message.info(`Option ${items[key].label}`);
 
     setOption(Number(e.key));
 

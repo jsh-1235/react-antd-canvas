@@ -5,6 +5,8 @@
 - npx create-react-app Project
 - cd Project
 - code .
+- npm run build
+- serve -s build
 
 ## Dependencies
 
