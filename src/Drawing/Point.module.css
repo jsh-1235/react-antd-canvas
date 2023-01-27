@@ -1,0 +1,29 @@
+.root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-content: stretch;
+  justify-content: stretch;
+  align-items: center;
+}
+
+.menu {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 0px 30px;
+  align-items: stretch;
+  justify-items: stretch;
+  justify-content: stretch;
+  padding: 10px 10px;
+}
+
+.button {
+  align-self: center;
+  justify-self: end;
+}
+
+.content {
+  width: 100%;
+  background-color: white;
+}

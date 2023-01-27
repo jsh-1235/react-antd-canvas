@@ -1,0 +1,53 @@
+.container {
+  height: 100%;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  gap: 0px 0px;
+  align-items: stretch;
+  justify-items: stretch;
+  justify-content: stretch;
+}
+
+input[type="color"] {
+  align-self: center;
+  justify-self: center;
+  grid-column: 1 / span 1;
+  grid-row: 1 / span 1;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: 0;
+  width: 100px;
+  height: 32px;
+  cursor: pointer;
+  margin: 0px;
+}
+
+::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+::-webkit-color-swatch {
+  border: 0;
+  border-radius: 6px;
+}
+
+::-moz-color-swatch,
+::-moz-focus-inner {
+  border: 0;
+}
+
+::-moz-focus-inner {
+  padding: 0;
+}
+
+.value {
+  align-self: center;
+  justify-self: center;
+  grid-column: 1 / span 1;
+  grid-row: 1 / span 1;
+  color: white;
+  pointer-events: none;
+}

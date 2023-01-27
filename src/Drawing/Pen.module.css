@@ -1,0 +1,56 @@
+.root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-content: stretch;
+  justify-content: stretch;
+  align-items: center;
+}
+
+.menu {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  grid-template-rows: auto auto;
+  gap: 0px 30px;
+  align-items: stretch;
+  justify-items: stretch;
+  justify-content: stretch;
+  padding: 10px 10px;
+}
+
+.switch {
+  align-self: center;
+  justify-self: stretch;
+  grid-column: 2 / span 1;
+  grid-row: 2 / span 1;
+}
+
+.lineCap {
+  align-self: center;
+  justify-self: start;
+  grid-column: 3 / span 1;
+  grid-row: 1 / span 1;
+  width: 100px;
+}
+
+.lineJoin {
+  align-self: center;
+  justify-self: end;
+  grid-column: 3 / span 1;
+  grid-row: 2 / span 1;
+  width: 100px;
+}
+
+.button {
+  align-self: center;
+  justify-self: end;
+  grid-column: 4 / span 1;
+  grid-row: 1 / span 2;
+  width: 100px;
+}
+
+.content {
+  width: 100%;
+  background-color: white;
+}

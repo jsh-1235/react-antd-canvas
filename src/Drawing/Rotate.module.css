@@ -1,0 +1,39 @@
+.root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-content: stretch;
+  justify-content: stretch;
+  align-items: center;
+}
+
+.menu {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: 1fr 1fr;
+  gap: 0px 30px;
+  align-items: stretch;
+  justify-items: stretch;
+  justify-content: stretch;
+  padding: 10px 10px;
+}
+
+.radio {
+  align-self: center;
+  justify-self: end;
+  grid-column: 2 / span 1;
+  grid-row: 1 / span 1;
+}
+
+.button {
+  align-self: center;
+  justify-self: stretch;
+  grid-column: 2 / span 1;
+  grid-row: 2 / span 1;
+}
+
+.content {
+  width: 100%;
+  background-color: white;
+}
