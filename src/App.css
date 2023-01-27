@@ -27,7 +27,7 @@
 }
 
 .footer {
-  /* position: fixed; */
+  position: fixed;
   height: var(--footer-hight);
   width: 100%;
   left: 0;

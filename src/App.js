@@ -10,7 +10,7 @@ import { AppstoreOutlined } from "@ant-design/icons";
 
 const { Header, Footer, Sider, Content } = Layout;
 
-const pages = ["drawing", "canvas"];
+const pages = ["drawing", "canvas", "svg"];
 
 const Drawing = React.lazy(() => import("./pages/Drawing"));
 const NotFound = React.lazy(() => import("./pages/NotFound"));

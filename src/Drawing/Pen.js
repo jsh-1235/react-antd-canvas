@@ -56,7 +56,7 @@ class Brush {
     this.y = e.offsetY;
     this.isDown = true;
 
-    console.log(e);
+    console.log(e, this.x, this.y, this.isDown);
   }
 
   mouseup(canvas, e) {
@@ -70,7 +70,7 @@ class Brush {
       this.isDown = false;
     }
 
-    console.log(e);
+    console.log(e, this.x, this.y, this.isDown);
   }
 
   mousemove(canvas, e) {
@@ -83,7 +83,7 @@ class Brush {
       this.y = e.offsetY;
     }
 
-    console.log(e);
+    console.log(e, this.x, this.y, this.isDown);
   }
 
   mouseout(canvas, e) {
@@ -92,7 +92,7 @@ class Brush {
 
     this.isDown = false;
 
-    console.log(e);
+    console.log(e, this.x, this.y, this.isDown);
   }
 
   clear(canvas) {
@@ -275,6 +275,10 @@ export default function Pen({ url }) {
       <div ref={contentRef} className={styles.content}>
         <canvas className={styles.canvas} ref={canvasRef} onMouseDown={handleMouseDown} onMouseUp={handleMouseUp} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}></canvas>
       </div>
+
+      {/* <div ref={contentRef} className={styles.content}>
+        <canvas className={styles.canvas} ref={canvasRef} onTouchStart={handleMouseDown} onTouchEnd={handleMouseUp} onTouchMove={handleMouseMove} onMouseLeave={handleMouseLeave}></canvas>
+      </div> */}
     </div>
   );
 }
