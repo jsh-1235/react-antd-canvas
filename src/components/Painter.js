@@ -1,10 +1,8 @@
 import styles from "./Painter.module.css";
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
 export default function Painter({ ...props }) {
-  const [html, setHTML] = useState("");
-
   useEffect(() => {
     // console.log(props);
 
@@ -12,7 +10,7 @@ export default function Painter({ ...props }) {
   }, []);
 
   useEffect(() => {
-    // console.log(props);
+    console.log(props.url);
 
     return () => {};
   }, [props.url]);

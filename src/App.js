@@ -8,8 +8,6 @@ import { Layout, Menu } from "antd";
 
 import { AppstoreOutlined } from "@ant-design/icons";
 
-const { Header, Footer, Sider, Content } = Layout;
-
 const pages = ["drawing", "canvas", "svg"];
 
 const Drawing = React.lazy(() => import("./pages/Drawing"));

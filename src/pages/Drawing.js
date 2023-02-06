@@ -37,7 +37,7 @@ const items = [
   ),
 ];
 
-export default function Keyframes() {
+export default function Drawing() {
   const [url, setURL] = useState({
     key: Number(menu[0].key) - 1,
     title: menu[0].label,
