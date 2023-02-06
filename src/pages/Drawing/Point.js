@@ -4,8 +4,8 @@ import React, { useState, useEffect, useRef } from "react";
 
 import { Button } from "antd";
 
-import DecoratedSlider from "../components/DecoratedSlider";
-import ColorPicker from "../components/ColorPicker";
+import DecoratedSlider from "../../components/DecoratedSlider";
+import ColorPicker from "../../components/ColorPicker";
 
 import { Canvas } from "./Canvas";
 

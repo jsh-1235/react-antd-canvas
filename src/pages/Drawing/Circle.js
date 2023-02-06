@@ -6,7 +6,7 @@ import { Button, Radio, Dropdown, Space, message } from "antd";
 
 import { DownOutlined, UserOutlined } from "@ant-design/icons";
 
-import DecoratedSlider from "../components/DecoratedSlider";
+import DecoratedSlider from "../../components/DecoratedSlider";
 
 import { Canvas } from "./Canvas";
 

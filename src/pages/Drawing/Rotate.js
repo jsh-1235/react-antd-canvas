@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 
 import { Button, Radio } from "antd";
 
-import DecoratedSlider from "../components/DecoratedSlider";
+import DecoratedSlider from "../../components/DecoratedSlider";
 
 import { Canvas } from "./Canvas";
 

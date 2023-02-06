@@ -7,13 +7,13 @@ import Painter from "../components/Painter";
 
 import { AppstoreOutlined, SettingOutlined } from "@ant-design/icons";
 
-import Random from "../Drawing/Random";
-import Point from "../Drawing/Point";
-import Rotate from "../Drawing/Rotate";
-import Circle from "../Drawing/Circle";
-import Pen from "../Drawing/Pen";
-import Ellipse from "../Drawing/Ellipse";
-import CirclePen from "../Drawing/CirclePen";
+import Random from "./Drawing/Random";
+import Point from "./Drawing/Point";
+import Rotate from "./Drawing/Rotate";
+import Circle from "./Drawing/Circle";
+import Pen from "./Drawing/Pen";
+import Ellipse from "./Drawing/Ellipse";
+import CirclePen from "./Drawing/CirclePen";
 
 const group = "Drawing";
 

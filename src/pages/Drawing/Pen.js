@@ -8,8 +8,8 @@ import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
 
 import { UserOutlined } from "@ant-design/icons";
 
-import DecoratedSlider from "../components/DecoratedSlider";
-import ColorPicker from "../components/ColorPicker";
+import DecoratedSlider from "../../components/DecoratedSlider";
+import ColorPicker from "../../components/ColorPicker";
 
 import { Canvas } from "./Canvas";
 

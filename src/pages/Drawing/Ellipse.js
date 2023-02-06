@@ -1,21 +1,21 @@
-import styles from "./CirclePen.module.css";
+import styles from "./Ellipse.module.css";
 
 import React, { useState, useEffect, useRef } from "react";
 
-import { Button } from "antd";
+import { Button, Switch } from "antd";
 
-import ColorPicker from "../components/ColorPicker";
+import DecoratedSlider from "../../components/DecoratedSlider";
+import ColorPicker from "../../components/ColorPicker";
 
 import { Canvas } from "./Canvas";
 
 class Brush {
-  constructor(color) {
-    this.canvas = undefined;
-    this.timer = undefined;
-
+  constructor(color, thickness) {
     this.color = color;
-    this.x = 0;
-    this.y = 0;
+    this.thickness = thickness;
+    this.continuous = false;
+    this.x1 = 0;
+    this.y1 = 0;
     this.isDown = false;
   }
 
@@ -23,45 +23,18 @@ class Brush {
     return canvas.getContext("2d");
   }
 
-  getPosition(e) {
-    const event = {};
-
-    if (!e) {
-      // const e = event;
-    }
-
-    if (e.offsetX) {
-      event.mouseX = e.offsetX;
-      event.mouseY = e.offsetY;
-    } else if (e.layerX) {
-      event.mouseX = e.layerX;
-      event.mouseY = e.layerY;
-    }
-
-    return event;
-  }
-
-  reset() {
-    if (this.timer != null) {
-      clearInterval(this.timer);
-      this.timer = null;
-    }
-  }
-
   mousedown(canvas, e) {
     e.preventDefault();
     e.stopPropagation();
 
-    const xy = this.getPosition(e);
+    //console.log(e.clientX, e.clientY);
 
-    this.x = xy.mouseX;
-    this.y = xy.mouseY;
+    const rect = canvas.getBoundingClientRect();
+
+    this.x1 = e.clientX - rect.left;
+    this.y1 = e.clientY - rect.top;
 
     this.isDown = true;
-
-    if (this.timer == null) {
-      this.timer = setInterval(draw, 50, this.canvas);
-    }
   }
 
   mouseup(canvas, e) {
@@ -73,8 +46,6 @@ class Brush {
     }
 
     this.isDown = false;
-
-    // this.reset();
   }
 
   mousemove(canvas, e) {
@@ -85,12 +56,25 @@ class Brush {
       return;
     }
 
-    const xy = this.getPosition(e);
+    //console.log(e.clientX, e.clientY);
 
-    this.x = xy.mouseX;
-    this.y = xy.mouseY;
+    const rect = canvas.getBoundingClientRect();
 
-    // console.log(this.x, this.y);
+    const x2 = e.clientX - rect.left;
+    const y2 = e.clientY - rect.top;
+
+    if (!brush.continuous) {
+      this.getContext(canvas).clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    this.getContext(canvas).beginPath();
+    this.getContext(canvas).strokeStyle = brush.color;
+    this.getContext(canvas).lineWidth = this.thickness;
+    this.getContext(canvas).moveTo(this.x1, this.y1 + (y2 - this.y1) / 2);
+    this.getContext(canvas).bezierCurveTo(this.x1, this.y1, x2, this.y1, x2, this.y1 + (y2 - this.y1) / 2);
+    this.getContext(canvas).bezierCurveTo(x2, y2, this.x1, y2, this.x1, this.y1 + (y2 - this.y1) / 2);
+    this.getContext(canvas).closePath();
+    this.getContext(canvas).stroke();
   }
 
   mouseout(canvas, e) {
@@ -109,50 +93,37 @@ class Brush {
   }
 }
 
-let count = 0;
+const brush = new Brush("#fdd835", 2);
 
-function draw(canvas) {
-  if (brush.isDown === true) {
-    count++;
-  } else {
-    count = 0;
-
-    brush.reset();
-  }
-
-  brush.getContext(canvas).beginPath();
-  brush.getContext(canvas).arc(brush.x - 0, brush.y - 0, count, 0, 2 * Math.PI);
-  brush.getContext(canvas).fillStyle = brush.color;
-  brush.getContext(canvas).fill();
-
-  console.log(`count : ${count}`);
-}
-
-const brush = new Brush("#fdd835");
-
-export default function CirclePen({ url }) {
+export default function Ellipse({ url }) {
   const contentRef = useRef(null);
   const canvasRef = useRef(null);
 
-  const [color, setColor] = useState(brush.color);
+  const [thickness, setThickness] = useState(5);
+  const [continuous, setContinuous] = useState(false);
+  const [color, setColor] = useState("#fdd835");
 
   const canvas = new Canvas(canvasRef);
 
   useEffect(() => {
     canvas.resize(contentRef);
 
-    brush.canvas = canvasRef.current;
-
     window.addEventListener("resize", handleResize);
 
     return () => {
       window.removeEventListener("resize", handleResize);
-
-      brush.reset();
-
-      count = 0;
     };
   }, []);
+
+  useEffect(() => {
+    brush.thickness = thickness;
+  }, [thickness]);
+
+  useEffect(() => {
+    brush.continuous = continuous;
+
+    console.log(brush.continuous);
+  }, [continuous]);
 
   useEffect(() => {
     brush.color = color;
@@ -164,6 +135,14 @@ export default function CirclePen({ url }) {
     canvas.resize(contentRef);
   };
 
+  const handleThicknessChanged = (value) => {
+    setThickness(value);
+  };
+
+  const handleContinuousChanged = (value) => {
+    setContinuous(value);
+  };
+
   const handleColorChanged = (e) => {
     console.log(e.target.value);
 
@@ -172,8 +151,6 @@ export default function CirclePen({ url }) {
 
   const handleClear = (e) => {
     brush.clear(canvasRef.current);
-
-    count = 0;
   };
 
   const handleMouseDown = (e) => {
@@ -192,17 +169,22 @@ export default function CirclePen({ url }) {
     brush.mouseout(canvasRef.current, e.nativeEvent);
   };
 
-  const colorStyle = {
+  const thicknessStyle = {
     gridColumn: "1 / span 1",
     gridRow: "1 / span 1",
-    alignSelf: "center",
-    justifySelf: "start",
+  };
+
+  const colorStyle = {
+    gridColumn: "2 / span 1",
+    gridRow: "1 / span 1",
   };
 
   return (
     <div className={styles.root} onResize={handleResize}>
       <div className={styles.menu}>
+        <DecoratedSlider style={thicknessStyle} title="Thickness" value={thickness} unit="ø" min={1} max={5} handleChanged={handleThicknessChanged} />
         <ColorPicker style={colorStyle} color={color} handleChanged={handleColorChanged} />
+        <Switch className={styles.switch} checkedChildren="ON" unCheckedChildren="OFF" onChange={handleContinuousChanged} />
         <Button className={styles.button} type="primary" onClick={handleClear}>
           CLEAR
         </Button>
